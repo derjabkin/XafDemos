@@ -28,6 +28,9 @@
             // 
             this.RequiredModuleTypes.Add(typeof(ReportsV1.Module.ReportsV1Module));
             this.RequiredModuleTypes.Add(typeof(DevExpress.ExpressApp.Win.SystemModule.SystemWindowsFormsModule));
+            this.RequiredModuleTypes.Add(typeof(DevExpress.ExpressApp.Reports.ReportsModule));
+            this.RequiredModuleTypes.Add(typeof(DevExpress.ExpressApp.Reports.Win.ReportsWindowsFormsModule));
+
         }
 
         #endregion

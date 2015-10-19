@@ -28,6 +28,9 @@
             // 
             this.RequiredModuleTypes.Add(typeof(ReportsV1.Module.ReportsV1Module));
             this.RequiredModuleTypes.Add(typeof(DevExpress.ExpressApp.Web.SystemModule.SystemAspNetModule));
+            this.RequiredModuleTypes.Add(typeof(DevExpress.ExpressApp.Reports.ReportsModule));
+            this.RequiredModuleTypes.Add(typeof(DevExpress.ExpressApp.Reports.Web.ReportsAspNetModule));
+
         }
 
         #endregion

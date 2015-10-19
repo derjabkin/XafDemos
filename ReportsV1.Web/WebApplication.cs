@@ -11,6 +11,8 @@ namespace ReportsV1.Web {
         private DevExpress.ExpressApp.SystemModule.SystemModule module1;
         private DevExpress.ExpressApp.Web.SystemModule.SystemAspNetModule module2;
         private ReportsV1.Module.ReportsV1Module module3;
+        private DevExpress.ExpressApp.Reports.ReportsModule reportsModule1;
+        private DevExpress.ExpressApp.Reports.Web.ReportsAspNetModule reportsAspNetModule1;
         private ReportsV1.Module.Web.ReportsV1AspNetModule module4;
 
         public ReportsV1AspNetApplication() {
@@ -51,7 +53,14 @@ namespace ReportsV1.Web {
             this.module2 = new DevExpress.ExpressApp.Web.SystemModule.SystemAspNetModule();
             this.module3 = new ReportsV1.Module.ReportsV1Module();
             this.module4 = new ReportsV1.Module.Web.ReportsV1AspNetModule();
+            this.reportsModule1 = new DevExpress.ExpressApp.Reports.ReportsModule();
+            this.reportsAspNetModule1 = new DevExpress.ExpressApp.Reports.Web.ReportsAspNetModule();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
+            // 
+            // reportsModule1
+            // 
+            this.reportsModule1.EnableInplaceReports = true;
+            this.reportsModule1.ReportDataType = typeof(DevExpress.Persistent.BaseImpl.ReportData);
             // 
             // ReportsV1AspNetApplication
             // 
@@ -60,6 +69,8 @@ namespace ReportsV1.Web {
             this.Modules.Add(this.module2);
             this.Modules.Add(this.module3);
             this.Modules.Add(this.module4);
+            this.Modules.Add(this.reportsModule1);
+            this.Modules.Add(this.reportsAspNetModule1);
             this.DatabaseVersionMismatch += new System.EventHandler<DevExpress.ExpressApp.DatabaseVersionMismatchEventArgs>(this.ReportsV1AspNetApplication_DatabaseVersionMismatch);
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
 
