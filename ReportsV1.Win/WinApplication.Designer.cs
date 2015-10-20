@@ -27,14 +27,14 @@
             this.module2 = new DevExpress.ExpressApp.Win.SystemModule.SystemWindowsFormsModule();
             this.module3 = new ReportsV1.Module.ReportsV1Module();
             this.module4 = new ReportsV1.Module.Win.ReportsV1WindowsFormsModule();
-            this.reportsModule1 = new DevExpress.ExpressApp.Reports.ReportsModule();
-            this.reportsWindowsFormsModule1 = new DevExpress.ExpressApp.Reports.Win.ReportsWindowsFormsModule();
+            this.reportsModule1 = new DevExpress.ExpressApp.ReportsV2.ReportsModuleV2();
+            this.reportsWindowsFormsModule1 = new DevExpress.ExpressApp.ReportsV2.Win.ReportsWindowsFormsModuleV2();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             // 
             // reportsModule1
             // 
             this.reportsModule1.EnableInplaceReports = true;
-            this.reportsModule1.ReportDataType = typeof(DevExpress.Persistent.BaseImpl.ReportData);
+            this.reportsModule1.ReportDataType = typeof(DevExpress.Persistent.BaseImpl.ReportDataV2);
             // 
             // ReportsV1WindowsFormsApplication
             // 
@@ -58,7 +58,7 @@
         private DevExpress.ExpressApp.Win.SystemModule.SystemWindowsFormsModule module2;
         private ReportsV1.Module.ReportsV1Module module3;
         private ReportsV1.Module.Win.ReportsV1WindowsFormsModule module4;
-        private DevExpress.ExpressApp.Reports.ReportsModule reportsModule1;
-        private DevExpress.ExpressApp.Reports.Win.ReportsWindowsFormsModule reportsWindowsFormsModule1;
+        private DevExpress.ExpressApp.ReportsV2.ReportsModuleV2 reportsModule1;
+        private DevExpress.ExpressApp.ReportsV2.Win.ReportsWindowsFormsModuleV2 reportsWindowsFormsModule1;
     }
 }
