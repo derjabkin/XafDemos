@@ -15,6 +15,7 @@ using DevExpress.ExpressApp.Model.Core;
 using DevExpress.ExpressApp.Model.DomainLogics;
 using DevExpress.ExpressApp.Model.NodeGenerators;
 using DevExpress.ExpressApp.Xpo;
+using DevExpress.ExpressApp.ReportsV2;
 
 namespace ReportsV1.Module
 {
@@ -29,7 +30,12 @@ namespace ReportsV1.Module
         public override IEnumerable<ModuleUpdater> GetModuleUpdaters(IObjectSpace objectSpace, Version versionFromDB)
         {
             ModuleUpdater updater = new DatabaseUpdate.Updater(objectSpace, versionFromDB);
-            return new ModuleUpdater[] { updater };
+            var predefinedReportsUpdater = new PredefinedReportsUpdater(Application, objectSpace, versionFromDB);
+            string reportName = Application.Model.Options.Application.Title;
+            predefinedReportsUpdater.AddPredefinedReport<Reports.PersonPredefinedReport>(reportName, 
+                typeof(Person));
+            return new ModuleUpdater[] { updater, predefinedReportsUpdater };
+
         }
         public override void Setup(XafApplication application)
         {
