@@ -97,6 +97,7 @@
   <ItemGroup>
     <Compile Include="BusinessObjects\Person.cs" />
     <Compile Include="BusinessObjects\PersonReportParametersObject.cs" />
+    <Compile Include="BusinessObjects\PersonSearchParameters.cs" />
     <Compile Include="Module.cs">
       <SubType>Component</SubType>
     </Compile>
