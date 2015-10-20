@@ -16,18 +16,21 @@ namespace ReportsV1.Module.DatabaseUpdate {
         }
         public override void UpdateDatabaseAfterUpdateSchema() {
             base.UpdateDatabaseAfterUpdateSchema();
-            //string name = "MyName";
-            //DomainObject1 theObject = ObjectSpace.FindObject<DomainObject1>(CriteriaOperator.Parse("Name=?", name));
-            //if(theObject == null) {
-            //    theObject = ObjectSpace.CreateObject<DomainObject1>();
-            //    theObject.Name = name;
-            //}
+
+            var oldReports = ObjectSpace.GetObjects<ReportData>();
+
+            XPObjectSpace os = (XPObjectSpace)ObjectSpace;
+
+            foreach(var oldReport in oldReports)
+            {
+                var report = new ReportDataV2(os.Session, os.TypesInfo.FindTypeInfo(oldReport.DataTypeName).Type);
+                report.DisplayName = oldReport.ReportName;
+                report.Content = oldReport.Content;
+            }
+            ObjectSpace.CommitChanges();
         }
         public override void UpdateDatabaseBeforeUpdateSchema() {
             base.UpdateDatabaseBeforeUpdateSchema();
-            //if(CurrentDBVersion < new Version("1.1.0.0") && CurrentDBVersion > new Version("0.0.0.0")) {
-            //    RenameColumn("DomainObject1Table", "OldColumnName", "NewColumnName");
-            //}
         }
     }
 }
