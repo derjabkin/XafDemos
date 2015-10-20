@@ -1,4 +1,5 @@
-﻿using DevExpress.Persistent.Base;
+﻿using DevExpress.Data.Filtering;
+using DevExpress.Persistent.Base;
 using DevExpress.Persistent.BaseImpl;
 using DevExpress.Xpo;
 using System;
@@ -16,6 +17,7 @@ namespace ReportsV1.Module.BusinessObjects
         {
             
         }
+
 
         private string firstName;
         public string FirstName

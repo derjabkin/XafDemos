@@ -33,7 +33,7 @@ namespace ReportsV1.Module
             var predefinedReportsUpdater = new PredefinedReportsUpdater(Application, objectSpace, versionFromDB);
             string reportName = Application.Model.Options.Application.Title;
             predefinedReportsUpdater.AddPredefinedReport<Reports.PersonPredefinedReport>(reportName, 
-                typeof(Person));
+                typeof(BusinessObjects.Person), typeof(BusinessObjects.PersonReportParametersObject));
             return new ModuleUpdater[] { updater, predefinedReportsUpdater };
 
         }
@@ -41,6 +41,7 @@ namespace ReportsV1.Module
         {
             base.Setup(application);
             AdditionalExportedTypes.Add(typeof(ReportData));
+            AdditionalExportedTypes.Add(typeof(BusinessObjects.PersonReportParametersObject));
             // Manage various aspects of the application UI and behavior at the module level.
         }
         public override void CustomizeTypesInfo(ITypesInfo typesInfo)
