@@ -4,6 +4,7 @@ using DevExpress.Persistent.BaseImpl;
 using DevExpress.Xpo;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 namespace ReportsV1.Module.BusinessObjects
 {
     [DefaultClassOptions]
-    public class Person : BaseObject
+    public class Person : BaseObject, IPerson
     {
         public Person(Session session) : base(session)
         {
@@ -31,6 +32,11 @@ namespace ReportsV1.Module.BusinessObjects
         {
             get { return lastName; }
             set { SetPropertyValue("LastName", ref lastName, value); }
+        }
+
+        string IPerson.FullName
+        {
+            get { return string.Format(CultureInfo.CurrentCulture, "{0} - {1}", LastName, FirstName); }
         }
     }
 

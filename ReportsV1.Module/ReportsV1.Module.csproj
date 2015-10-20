@@ -95,6 +95,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BusinessObjects\IPerson.cs" />
     <Compile Include="BusinessObjects\Person.cs" />
     <Compile Include="BusinessObjects\PersonReportParametersObject.cs" />
     <Compile Include="BusinessObjects\PersonSearchParameters.cs" />
@@ -107,6 +108,12 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DatabaseUpdate\Updater.cs" />
+    <Compile Include="Reports\InterfaceReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\InterfaceReport.Designer.cs">
+      <DependentUpon>InterfaceReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reports\NonPersistentReport.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -133,6 +140,9 @@
       <DependentUpon>Module.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="Reports\InterfaceReport.resx">
+      <DependentUpon>InterfaceReport.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\NonPersistentReport.resx">
       <DependentUpon>NonPersistentReport.cs</DependentUpon>
     </EmbeddedResource>

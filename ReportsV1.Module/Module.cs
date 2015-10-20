@@ -16,6 +16,7 @@ using DevExpress.ExpressApp.Model.DomainLogics;
 using DevExpress.ExpressApp.Model.NodeGenerators;
 using DevExpress.ExpressApp.Xpo;
 using DevExpress.ExpressApp.ReportsV2;
+using ReportsV1.Module.BusinessObjects;
 
 namespace ReportsV1.Module
 {
@@ -40,6 +41,9 @@ namespace ReportsV1.Module
             predefinedReportsUpdater.AddPredefinedReport<Reports.NonPersistentReport>("NonPersistent Report",
                 typeof(BusinessObjects.ReportObjectSource));
 
+            predefinedReportsUpdater.AddPredefinedReport<Reports.InterfaceReport>("Interface Report",
+                typeof(BusinessObjects.Person));
+
             return new ModuleUpdater[] { updater, predefinedReportsUpdater };
 
         }
@@ -49,15 +53,10 @@ namespace ReportsV1.Module
             base.Setup(application);
             AdditionalExportedTypes.Add(typeof(ReportData));
             AdditionalExportedTypes.Add(typeof(BusinessObjects.PersonReportParametersObject));
-            application.CreateCustomObjectSpaceProvider += application_CreateCustomObjectSpaceProvider;
             // Manage various aspects of the application UI and behavior at the module level.
         }
 
-        void application_CreateCustomObjectSpaceProvider(object sender, CreateCustomObjectSpaceProviderEventArgs e)
-        {
-            e.ObjectSpaceProviders.Add(new NonPersistentObjectSpaceProvider());
-        }
-
+        
 
         public override void CustomizeTypesInfo(ITypesInfo typesInfo)
         {

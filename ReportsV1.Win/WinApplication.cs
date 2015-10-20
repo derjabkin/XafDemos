@@ -5,15 +5,49 @@ using DevExpress.ExpressApp.Win;
 using System.Collections.Generic;
 using DevExpress.ExpressApp.Updating;
 using DevExpress.ExpressApp.Xpo;
+using DevExpress.ExpressApp.DC;
+using ReportsV1.Module.BusinessObjects;
 
 namespace ReportsV1.Win {
     // For more typical usage scenarios, be sure to check out https://documentation.devexpress.com/eXpressAppFramework/DevExpressExpressAppWinWinApplicationMembersTopicAll.aspx
     public partial class ReportsV1WindowsFormsApplication : WinApplication {
+
+        private NonPersistentObjectSpaceProvider nonPersistentProvider;
+
         public ReportsV1WindowsFormsApplication() {
             InitializeComponent();
         }
+        
         protected override void CreateDefaultObjectSpaceProvider(CreateCustomObjectSpaceProviderEventArgs args) {
             args.ObjectSpaceProvider = new XPObjectSpaceProvider(args.ConnectionString, args.Connection, false);
+
+            NonPersistentEntityStore entityStore = new NonPersistentEntityStore((TypesInfo)TypesInfo);
+            entityStore.RegisterEntity(typeof(IPerson));
+            nonPersistentProvider = new NonPersistentObjectSpaceProvider(TypesInfo, entityStore);
+            args.ObjectSpaceProviders.Add(nonPersistentProvider);
+
+        }
+        protected override IObjectSpace CreateObjectSpaceCore(Type objectType)
+        {
+
+            if (objectType == typeof(IPerson))
+            {
+                var os = (NonPersistentObjectSpace)nonPersistentProvider.CreateObjectSpace();
+                os.ObjectsGetting += os_ObjectsGetting;
+                return os;
+            }
+            return base.CreateObjectSpaceCore(objectType);
+        }
+
+        void os_ObjectsGetting(object sender, ObjectsGettingEventArgs e)
+        {
+            if (e.ObjectType == typeof(IPerson))
+            {
+                var innerOs = CreateObjectSpace(typeof(Person));
+                e.Objects = innerOs.GetObjects(typeof(Person));
+                e.Handled = true;
+
+            }
         }
         private void ReportsV1WindowsFormsApplication_CustomizeLanguagesList(object sender, CustomizeLanguagesListEventArgs e) {
             string userLanguageName = System.Threading.Thread.CurrentThread.CurrentUICulture.Name;
@@ -21,6 +55,8 @@ namespace ReportsV1.Win {
                 e.Languages.Add(userLanguageName);
             }
         }
+
+        
         private void ReportsV1WindowsFormsApplication_DatabaseVersionMismatch(object sender, DevExpress.ExpressApp.DatabaseVersionMismatchEventArgs e) {
 #if EASYTEST
             e.Updater.Update();
