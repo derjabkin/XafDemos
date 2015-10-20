@@ -10,6 +10,7 @@ using DevExpress.Persistent.BaseImpl;
 using DevExpress.XtraReports.UI;
 using System.IO;
 using DevExpress.Persistent.Base.ReportsV2;
+using System.Collections.Generic;
 
 namespace ReportsV1.Module.DatabaseUpdate
 {
@@ -28,6 +29,7 @@ namespace ReportsV1.Module.DatabaseUpdate
 
             XPObjectSpace os = (XPObjectSpace)ObjectSpace;
 
+            List<ReportData> reportsToDelete = new List<ReportData>();
             foreach (var oldReport in oldReports)
             {
                 string dataTypeName = oldReport.DataTypeName;
@@ -40,7 +42,13 @@ namespace ReportsV1.Module.DatabaseUpdate
                         Content = AddCollectionDataSource(oldReport.Content, dataTypeName)
                     };
                 }
+
+                reportsToDelete.Add(oldReport);
+                
             }
+
+            foreach (var r in reportsToDelete)
+                ObjectSpace.Delete(r);
             ObjectSpace.CommitChanges();
         }
 
@@ -60,6 +68,31 @@ namespace ReportsV1.Module.DatabaseUpdate
             {
                 report.SaveLayout(stream);
                 return stream.ToArray();
+            }
+        }
+
+        private static void ExchangeDataBindings(XtraReport report)
+        {
+            foreach (Band band in report.Bands)
+            {
+                foreach (var control in band.Controls)
+                {
+                    XRLabel label = control as XRLabel;
+                    if (label != null)
+                    {
+                        // [FristName]   -  [LastName]
+                        label.Visible = false;
+                        var binding = label.DataBindings.FirstOrDefault();
+                        if (binding != null)
+                        {
+                            if (binding.DataMember == "FirstName")
+                            {
+                                label.DataBindings.Clear();
+                                label.DataBindings.Add("Text", report.DataSource, "FirstName1");
+                            }
+                        }
+                    }
+                }
             }
         }
 

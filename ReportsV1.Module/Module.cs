@@ -37,16 +37,28 @@ namespace ReportsV1.Module
 
             predefinedReportsUpdater.AddPredefinedReport<Reports.ViewDataSourceReport>("View als Datequelle",
                 typeof(BusinessObjects.Person));
+            predefinedReportsUpdater.AddPredefinedReport<Reports.NonPersistentReport>("NonPersistent Report",
+                typeof(BusinessObjects.ReportObjectSource));
+
             return new ModuleUpdater[] { updater, predefinedReportsUpdater };
 
         }
+
         public override void Setup(XafApplication application)
         {
             base.Setup(application);
             AdditionalExportedTypes.Add(typeof(ReportData));
             AdditionalExportedTypes.Add(typeof(BusinessObjects.PersonReportParametersObject));
+            application.CreateCustomObjectSpaceProvider += application_CreateCustomObjectSpaceProvider;
             // Manage various aspects of the application UI and behavior at the module level.
         }
+
+        void application_CreateCustomObjectSpaceProvider(object sender, CreateCustomObjectSpaceProviderEventArgs e)
+        {
+            e.ObjectSpaceProviders.Add(new NonPersistentObjectSpaceProvider());
+        }
+
+
         public override void CustomizeTypesInfo(ITypesInfo typesInfo)
         {
             base.CustomizeTypesInfo(typesInfo);
