@@ -112,6 +112,12 @@
     <Compile Include="Reports\PersonPredefinedReport.Designer.cs">
       <DependentUpon>PersonPredefinedReport.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reports\ViewDataSourceReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\ViewDataSourceReport.Designer.cs">
+      <DependentUpon>ViewDataSourceReport.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Model.DesignedDiffs.xafml" />
@@ -122,6 +128,9 @@
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Reports\PersonPredefinedReport.resx">
       <DependentUpon>PersonPredefinedReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\ViewDataSourceReport.resx">
+      <DependentUpon>ViewDataSourceReport.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
