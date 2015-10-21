@@ -60,6 +60,10 @@ namespace ReportsV1.Module.BusinessObjects
 
         }
 
+        public int CalculatedField
+        {
+            get { return 0; }
+        }
         [PersistentAlias("LastName + '-' + FirstName")]
         public string PersistentAliasProperty
         {
