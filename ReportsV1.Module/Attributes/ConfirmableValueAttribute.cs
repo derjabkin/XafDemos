@@ -8,5 +8,6 @@ namespace ReportsV1.Module.Attributes
 {
     public sealed class ConfirmableValueAttribute : Attribute
     {
+        public string MethodName { get; set; }
     }
 }

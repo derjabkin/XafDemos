@@ -142,6 +142,9 @@
     <Compile Include="Controllers\ConfirmationController.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controllers\GridConfirmationController.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="WinModule.cs">
       <SubType>Component</SubType>
     </Compile>

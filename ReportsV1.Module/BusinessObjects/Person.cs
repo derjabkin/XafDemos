@@ -48,7 +48,7 @@ namespace ReportsV1.Module.BusinessObjects
         }
 
         private string lastName;
-        [ConfirmableValue]
+        [ConfirmableValue(MethodName = "ShouldConfirmLastName")]
         public string LastName
         {
             get { return lastName; }
