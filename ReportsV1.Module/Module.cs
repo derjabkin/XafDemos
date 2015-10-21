@@ -34,7 +34,7 @@ namespace ReportsV1.Module
             var predefinedReportsUpdater = new PredefinedReportsUpdater(Application, objectSpace, versionFromDB);
             string reportName = Application.Model.Options.Application.Title;
             predefinedReportsUpdater.AddPredefinedReport<Reports.PersonPredefinedReport>(reportName, 
-                typeof(BusinessObjects.Person), typeof(BusinessObjects.PersonReportParametersObject));
+                typeof(BusinessObjects.Person), typeof(BusinessObjects.PersonReportParametersObject), true);
 
             predefinedReportsUpdater.AddPredefinedReport<Reports.ViewDataSourceReport>("View als Datequelle",
                 typeof(BusinessObjects.Person));

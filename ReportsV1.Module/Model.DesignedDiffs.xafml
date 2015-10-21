@@ -1,5 +1,14 @@
-﻿<?xml version="1.0" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Application Title="ReportsV1" Logo="ExpressAppLogo">
+  <ActionDesign>
+    <Actions>
+      <Action Id="Refresh" ValidationContexts="Refresh" />
+    </Actions>
+  </ActionDesign>
+  <SchemaModules>
+    <SchemaModule Name="SystemModule" Version="15.1.7.0" IsNewNode="True" />
+  </SchemaModules>
   <Views>
+    <ListView Id="Person_ListView" DataAccessMode="Server" />
   </Views>
 </Application>

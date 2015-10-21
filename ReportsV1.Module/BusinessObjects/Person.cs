@@ -1,6 +1,8 @@
 ﻿using DevExpress.Data.Filtering;
+using DevExpress.ExpressApp;
 using DevExpress.Persistent.Base;
 using DevExpress.Persistent.BaseImpl;
+using DevExpress.Persistent.Validation;
 using DevExpress.Xpo;
 using System;
 using System.Collections.Generic;
@@ -14,17 +16,34 @@ namespace ReportsV1.Module.BusinessObjects
     [DefaultClassOptions]
     public class Person : BaseObject, IPerson
     {
-        public Person(Session session) : base(session)
+        public Person(Session session)
+            : base(session)
         {
-            
         }
 
+
+        //[RuleFromBoolProperty(TargetContextIDs = "Refresh")]
+        public bool IsValid
+        {
+            get
+            {
+                return FirstName != null && FirstName.Length > 3;
+            }
+        }
 
         private string firstName;
         public string FirstName
         {
             get { return firstName; }
-            set { SetPropertyValue("FirstName", ref firstName, value); }
+            set
+            {
+                if (firstName != value && !IsLoading)
+                {
+                    if (value == null || value.Length < 3)
+                        throw new UserFriendlyException("Wert ist falsch");
+                    SetPropertyValue("FirstName", ref firstName, value);
+                }
+            }
         }
 
         private string lastName;
@@ -34,10 +53,23 @@ namespace ReportsV1.Module.BusinessObjects
             set { SetPropertyValue("LastName", ref lastName, value); }
         }
 
+
+        public string ServerModeTestProperty
+        {
+            get { return string.Format(CultureInfo.CurrentCulture, "{0} - {1}", LastName, FirstName); }
+
+        }
+
+        [PersistentAlias("LastName + '-' + FirstName")]
+        public string PersistentAliasProperty
+        {
+            get { return (string)EvaluateAlias("PersistentAliasProperty"); }
+        }
         string IPerson.FullName
         {
             get { return string.Format(CultureInfo.CurrentCulture, "{0} - {1}", LastName, FirstName); }
         }
+
     }
 
 }

@@ -13,5 +13,10 @@ namespace ReportsV1.Module.Reports
             InitializeComponent();
         }
 
+        private void Detail_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        {
+            xrLabel1.BackColor = Color.Red;
+        }
+
     }
 }
