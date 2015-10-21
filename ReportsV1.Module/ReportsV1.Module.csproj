@@ -96,6 +96,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\ConfirmableValueAttribute.cs" />
     <Compile Include="BusinessObjects\IPerson.cs" />
     <Compile Include="BusinessObjects\Person.cs" />
     <Compile Include="BusinessObjects\PersonReportParametersObject.cs" />

@@ -4,6 +4,7 @@ using DevExpress.Persistent.Base;
 using DevExpress.Persistent.BaseImpl;
 using DevExpress.Persistent.Validation;
 using DevExpress.Xpo;
+using ReportsV1.Module.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -47,10 +48,16 @@ namespace ReportsV1.Module.BusinessObjects
         }
 
         private string lastName;
+        [ConfirmableValue]
         public string LastName
         {
             get { return lastName; }
             set { SetPropertyValue("LastName", ref lastName, value); }
+        }
+
+        public bool ShouldConfirmLastName(string value)
+        {
+            return value == null || value.Length < 4;
         }
 
 
