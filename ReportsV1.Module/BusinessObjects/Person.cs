@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 namespace ReportsV1.Module.BusinessObjects
 {
     [DefaultClassOptions]
+    [OptimisticLocking(false)]
     public class Person : BaseObject, IPerson
     {
         public Person(Session session)
@@ -58,11 +59,41 @@ namespace ReportsV1.Module.BusinessObjects
             }
         }
 
+        private int communicationCount;
+        public int CommunicationCount
+        {
+            get { return communicationCount; }
+            set { SetPropertyValue("CommunicationCount", ref communicationCount, value); }
+        }
 
-        [Association, Aggregated]
+
+        private readonly object communicationLock = new object();
+        private XPCollection<PersonCommunication> communication;
+        [Association]
         public XPCollection<PersonCommunication> Communication
         {
-            get { return GetCollection<PersonCommunication>("Communication"); }
+            get
+            {
+                if (communication == null)
+                {
+                    lock (communicationLock)
+                    {
+                        if (communication == null)
+                        {
+                            var c = GetCollection<PersonCommunication>("Communication");
+                            c.CollectionChanged += communication_CollectionChanged;
+                            communication = c;
+                        }
+                    }
+                }
+
+                return communication;
+            }
+        }
+
+        void communication_CollectionChanged(object sender, XPCollectionChangedEventArgs e)
+        {
+            Calculate();
         }
 
         public bool ShouldConfirmLastName(string value)
@@ -91,6 +122,11 @@ namespace ReportsV1.Module.BusinessObjects
             get { return string.Format(CultureInfo.CurrentCulture, "{0} - {1}", LastName, FirstName); }
         }
 
+        internal void Calculate()
+        {
+            CommunicationCount = Communication.Where(c => !string.IsNullOrEmpty(c.CommunictionValue)).Sum(c => c.CommunictionValue.Length);
+            OnChanged();
+        }
     }
 
 }

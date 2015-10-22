@@ -1,4 +1,5 @@
-﻿using DevExpress.Persistent.BaseImpl;
+﻿using DevExpress.Persistent.Base;
+using DevExpress.Persistent.BaseImpl;
 using DevExpress.Xpo;
 using System;
 using System.Collections.Generic;
@@ -7,9 +8,11 @@ using System.Text;
 
 namespace ReportsV1.Module.BusinessObjects
 {
+    [DefaultClassOptions]
     public class PersonCommunication : BaseObject
     {
-        public PersonCommunication(Session session) : base(session)
+        public PersonCommunication(Session session)
+            : base(session)
         {
 
         }
@@ -33,7 +36,13 @@ namespace ReportsV1.Module.BusinessObjects
         public string CommunictionValue
         {
             get { return communictationValue; }
-            set { SetPropertyValue("CommunictionValue", ref communictationValue, value); }
+            set
+            {
+                if (SetPropertyValue("CommunictionValue", ref communictationValue, value) && !IsLoading && Person != null)
+                {
+                    Person.Calculate();
+                }
+            }
         }
 
     }

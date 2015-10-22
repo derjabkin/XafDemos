@@ -52,12 +52,16 @@ namespace ReportsV1.Module.Win.Controllers
             if (member != null)
             {
                 var type = obj.GetType();
-                var methodInfo = type.GetMethod("ShouldConfirm" + member.Name, BindingFlags.Instance | BindingFlags.Public);
+                var attr = member.FindAttribute<ConfirmableValueAttribute>();
+                if (attr != null)
+                {
+                    var methodInfo = type.GetMethod("ShouldConfirm" + member.Name, BindingFlags.Instance | BindingFlags.Public);
 
-                if (methodInfo == null || (bool)methodInfo.Invoke(obj, new[] { edit.EditValue }))
-                    e.Cancel =
-                        XtraMessageBox.Show("Wollen Sie den Wert wirklich eingeben?", "Bestätigung",
-                        MessageBoxButtons.YesNo) != DialogResult.Yes;
+                    if (methodInfo == null || (bool)methodInfo.Invoke(obj, new[] { edit.EditValue }))
+                        e.Cancel =
+                            XtraMessageBox.Show("Wollen Sie den Wert wirklich eingeben?", "Bestätigung",
+                            MessageBoxButtons.YesNo) != DialogResult.Yes;
+                }
             }
         }
 

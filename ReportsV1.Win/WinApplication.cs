@@ -8,6 +8,8 @@ using DevExpress.ExpressApp.Xpo;
 using DevExpress.ExpressApp.DC;
 using ReportsV1.Module.BusinessObjects;
 using DevExpress.ExpressApp.SystemModule;
+using DevExpress.ExpressApp.Win.SystemModule;
+using DevExpress.Xpo;
 
 namespace ReportsV1.Win {
     // For more typical usage scenarios, be sure to check out https://documentation.devexpress.com/eXpressAppFramework/DevExpressExpressAppWinWinApplicationMembersTopicAll.aspx
@@ -17,12 +19,20 @@ namespace ReportsV1.Win {
 
         public ReportsV1WindowsFormsApplication() {
             InitializeComponent();
+            //XpoDefault.TrackPropertiesModifications = true;
+            LockController.CustomFormatSimultaneousChangeMessage += LockController_CustomFormatSimultaneousChangeMessage;
         }
 
         protected override void OnLoggedOn(LogonEventArgs args)
         {
             base.OnLoggedOn(args);
             AboutInfo.Instance.Description = "asdasddas";
+        
+        }
+
+        void LockController_CustomFormatSimultaneousChangeMessage(object sender, CustomFormatSimultaneousChangeMessageEventArgs e)
+        {
+            e.Message = "Daten wurden in mehreren Tabs verändert. Bitte kontrollieren!";
         }
         protected override void CreateDefaultObjectSpaceProvider(CreateCustomObjectSpaceProviderEventArgs args) {
             args.ObjectSpaceProvider = new XPObjectSpaceProvider(args.ConnectionString, args.Connection, false);
