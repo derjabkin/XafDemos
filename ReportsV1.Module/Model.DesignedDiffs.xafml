@@ -9,6 +9,6 @@
     <SchemaModule Name="SystemModule" Version="15.1.7.0" IsNewNode="True" />
   </SchemaModules>
   <Views>
-    <ListView Id="Person_ListView" DataAccessMode="Server" AllowEdit="True" />
+    <ListView Id="Person_ListView" DataAccessMode="Client" AllowEdit="True" />
   </Views>
 </Application>

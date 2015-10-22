@@ -99,9 +99,13 @@
     <Compile Include="Attributes\ConfirmableValueAttribute.cs" />
     <Compile Include="BusinessObjects\IPerson.cs" />
     <Compile Include="BusinessObjects\Person.cs" />
+    <Compile Include="BusinessObjects\PersonCommunication.cs" />
     <Compile Include="BusinessObjects\PersonReportParametersObject.cs" />
     <Compile Include="BusinessObjects\PersonSearchParameters.cs" />
     <Compile Include="BusinessObjects\ReportObjectSource.cs" />
+    <Compile Include="Controllers\PersonPrefetchController.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Module.cs">
       <SubType>Component</SubType>
     </Compile>

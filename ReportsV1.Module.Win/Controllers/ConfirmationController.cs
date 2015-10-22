@@ -22,7 +22,10 @@ namespace ReportsV1.Module.Win.Controllers
             foreach (var viewItem in View.Items)
             {
                 var editor = viewItem as DXPropertyEditor;
-                editor.Control.Validating += Control_Validating;
+                if (editor != null)
+                {
+                    editor.Control.Validating += Control_Validating;
+                }
             }
         }
 

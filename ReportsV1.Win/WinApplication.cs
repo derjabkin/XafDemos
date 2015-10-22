@@ -7,6 +7,7 @@ using DevExpress.ExpressApp.Updating;
 using DevExpress.ExpressApp.Xpo;
 using DevExpress.ExpressApp.DC;
 using ReportsV1.Module.BusinessObjects;
+using DevExpress.ExpressApp.SystemModule;
 
 namespace ReportsV1.Win {
     // For more typical usage scenarios, be sure to check out https://documentation.devexpress.com/eXpressAppFramework/DevExpressExpressAppWinWinApplicationMembersTopicAll.aspx
@@ -17,7 +18,12 @@ namespace ReportsV1.Win {
         public ReportsV1WindowsFormsApplication() {
             InitializeComponent();
         }
-        
+
+        protected override void OnLoggedOn(LogonEventArgs args)
+        {
+            base.OnLoggedOn(args);
+            AboutInfo.Instance.Description = "asdasddas";
+        }
         protected override void CreateDefaultObjectSpaceProvider(CreateCustomObjectSpaceProviderEventArgs args) {
             args.ObjectSpaceProvider = new XPObjectSpaceProvider(args.ConnectionString, args.Connection, false);
 

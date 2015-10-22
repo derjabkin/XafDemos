@@ -52,7 +52,17 @@ namespace ReportsV1.Module.BusinessObjects
         public string LastName
         {
             get { return lastName; }
-            set { SetPropertyValue("LastName", ref lastName, value); }
+            set
+            {
+                SetPropertyValue("LastName", ref lastName, value);
+            }
+        }
+
+
+        [Association, Aggregated]
+        public XPCollection<PersonCommunication> Communication
+        {
+            get { return GetCollection<PersonCommunication>("Communication"); }
         }
 
         public bool ShouldConfirmLastName(string value)
