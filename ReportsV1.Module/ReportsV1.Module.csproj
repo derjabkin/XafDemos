@@ -106,6 +106,9 @@
     <Compile Include="Controllers\PersonPrefetchController.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controllers\ScriptObjectController.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Module.cs">
       <SubType>Component</SubType>
     </Compile>
