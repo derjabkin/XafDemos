@@ -136,6 +136,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CancelDeleteController.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controllers\CalculatedFieldController.cs">
       <SubType>Component</SubType>
     </Compile>
