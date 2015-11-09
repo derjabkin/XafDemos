@@ -45,6 +45,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DevExpress.Charts.v15.1.Core, Version=15.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.ExpressApp.ConditionalAppearance.v15.1, Version=15.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.ExpressApp.ReportsV2.v15.1, Version=15.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.ExpressApp.Validation.v15.1, Version=15.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.ExpressApp.Xpo.v15.1">
@@ -100,6 +101,7 @@
     <Compile Include="BusinessObjects\IPerson.cs" />
     <Compile Include="BusinessObjects\Person.cs" />
     <Compile Include="BusinessObjects\PersonCommunication.cs" />
+    <Compile Include="BusinessObjects\PersonDetail.cs" />
     <Compile Include="BusinessObjects\PersonReportParametersObject.cs" />
     <Compile Include="BusinessObjects\PersonSearchParameters.cs" />
     <Compile Include="BusinessObjects\ReportObjectSource.cs" />

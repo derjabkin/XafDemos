@@ -1,5 +1,6 @@
 ﻿using DevExpress.Data.Filtering;
 using DevExpress.ExpressApp;
+using DevExpress.ExpressApp.ConditionalAppearance;
 using DevExpress.Persistent.Base;
 using DevExpress.Persistent.BaseImpl;
 using DevExpress.Persistent.Validation;
@@ -7,6 +8,7 @@ using DevExpress.Xpo;
 using ReportsV1.Module.Attributes;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -33,7 +35,14 @@ namespace ReportsV1.Module.BusinessObjects
             }
         }
 
+        private PersonDetail detail;
+        public PersonDetail Detail
+        {
+            get { return detail; }
+            set { SetPropertyValue("Detail", ref detail, value); }
+        }
         private string firstName;
+        [Appearance("FirtNameAppearance", Criteria = "Detail.DetailProperty='Rot'", BackColor = "Red")]
         public string FirstName
         {
             get { return firstName; }
